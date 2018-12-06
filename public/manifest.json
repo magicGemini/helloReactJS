@@ -8,6 +8,7 @@
       "type": "image/x-icon"
     }
   ],
+  "launch_path": "index.html",
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
