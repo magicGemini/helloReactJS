@@ -288,48 +288,94 @@ import * as serviceWorker from './serviceWorker';
 // ReactDOM.render(<Greeting isLoggedIn={true}/>, document.getElementById("root"));
 
 // <demo 15: 元素变量>
-function Greeting(props) {
-    if (props.isLoggedIn)
-        return <h1>Welcome</h1>;
-    return <h1>Please Loggin</h1>;
+// function Greeting(props) {
+//     if (props.isLoggedIn)
+//         return <h1>Welcome</h1>;
+//     return <h1>Please Loggin</h1>;
+// }
+//
+// class LoginControl extends React.Component {
+//
+//     constructor(props) {
+//         super(props);
+//         this.state = {isLoggedIn: false}
+//         this.handleLoginClick = this.handleLoginClick.bind(this);
+//         this.handleLogoutClick = this.handleLogoutClick.bind(this);
+//     }
+//
+//     handleLoginClick() {
+//         this.setState({isLoggedIn: true});
+//     }
+//
+//     handleLogoutClick() {
+//         this.setState({isLoggedIn: false});
+//     }
+//
+//     render() {
+//         const isLogged = this.state.isLoggedIn;
+//         let button = null;
+//         if (isLogged)
+//             button = <button onClick={this.handleLogoutClick}>Logout</button>;
+//         else
+//             button = <button onClick={this.handleLoginClick}>Login</button>;
+//         return (
+//             <div>
+//                 <Greeting isLoggedIn={this.state.isLoggedIn}/>
+//                 {button}
+//             </div>
+//         );
+//     }
+//
+// }
+//
+// ReactDOM.render(<LoginControl/>, document.getElementById("root"));
+
+// <demo 16: 与运算符 &&>
+// function MailBox(props) {
+//     return (
+//         <div>
+//             <h1>Hello~~~</h1>
+//             {
+//                 props.unReadMessages.length > 0 &&
+//                 <h2>
+//                    you have {props.unReadMessages.length} messages not been read.
+//                 </h2>
+//             }
+//         </div>
+//     );
+// }
+// const messages = ["React", "Re:React", "Re: Re: React"];
+// ReactDOM.render(<MailBox unReadMessages={messages}/>, document.getElementById("root"));
+
+// <demo 17: 阻止组件渲染>
+function WarningBar(props) {
+    if (!props.warn)
+        return null;
+    return (<div className="warning">Warning!!!</div>);
 }
 
-class LoginControl extends React.Component {
-
+class Page extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {isLoggedIn: false}
-        this.handleLoginClick = this.handleLoginClick.bind(this);
-        this.handleLogoutClick = this.handleLogoutClick.bind(this);
+        this.state = {warn: false};
+        this.handleToggleClick = this.handleToggleClick.bind(this);
     }
 
-    handleLoginClick() {
-        this.setState({isLoggedIn: true});
-    }
-
-    handleLogoutClick() {
-        this.setState({isLoggedIn: false});
+    handleToggleClick() {
+        this.setState(prevState => ({warn: !prevState.warn}));
     }
 
     render() {
-        const isLogged = this.state.isLoggedIn;
-        let button = null;
-        if (isLogged)
-            button = <button onClick={this.handleLogoutClick}>Logout</button>;
-        else
-            button = <button onClick={this.handleLoginClick}>Login</button>;
         return (
             <div>
-                <Greeting isLoggedIn={this.state.isLoggedIn}/>
-                {button}
+                <WarningBar warn={this.state.warn}/>
+                <button onClick={this.handleToggleClick}> {this.state.warn ? "hide" : "show"}</button>
             </div>
         );
     }
-
 }
 
-ReactDOM.render(<LoginControl/>, document.getElementById("root"));
-
+ReactDOM.render(<Page/>, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
